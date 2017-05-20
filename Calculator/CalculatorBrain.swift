@@ -11,6 +11,7 @@ import Foundation
 struct CalculatorBrain {
     
     private var accumulator: Double?
+    private var resultIsPending = false
     
     private enum Operation {
         case constant(Double)
@@ -24,7 +25,10 @@ struct CalculatorBrain {
         "e": Operation.constant(M_E),
         "√": Operation.unaryOperation(sqrt),
         "cos": Operation.unaryOperation(cos),
+        "tan": Operation.unaryOperation(tan),
+        "sin": Operation.unaryOperation(sin),
         "±": Operation.unaryOperation({ -$0 }),
+        "㎟": Operation.unaryOperation({ $0 * $0}),
         "×": Operation.binaryOperation({ $0 * $1 }),
         "÷": Operation.binaryOperation({ $0 / $1 }),
         "−": Operation.binaryOperation({ $0 - $1 }),
